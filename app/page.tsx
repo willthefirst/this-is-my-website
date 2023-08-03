@@ -5,10 +5,15 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { MouseEventHandler } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { errorCountSlice, selectErrorCount } from '@/lib/redux'
 
 export default function Home() {
+  const dispatch = useDispatch()
+  const errorCount: number = useSelector(selectErrorCount)
+
   const handleClick: MouseEventHandler<HTMLButtonElement> = (event): void => {
-    throw new Error('Function not implemented.')
+    dispatch(errorCountSlice.actions.increment());
   }
 
   return (
@@ -31,6 +36,9 @@ export default function Home() {
           <Button onClick={handleClick}>Log in</Button>
         </CardFooter>
       </Card>
+      <pre>
+        errorCount: {errorCount}
+      </pre>
     </main>
   )
 }
