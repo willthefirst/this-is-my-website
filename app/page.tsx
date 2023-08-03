@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label'
 import { MouseEventHandler } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { errorCountSlice, selectErrorCount } from '@/lib/redux'
+import AlertPicker from './AlertPicker'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -15,6 +16,8 @@ export default function Home() {
   const handleClick: MouseEventHandler<HTMLButtonElement> = (event): void => {
     dispatch(errorCountSlice.actions.increment());
   }
+
+  const hasError = errorCount > 0;
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
@@ -32,13 +35,18 @@ export default function Home() {
             </div>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button onClick={handleClick}>Log in</Button>
+        <CardFooter className="flex flex-col space-y-6">
+          <div>
+            <Button onClick={handleClick}>Log in</Button>
+          </div>
+          {
+            hasError &&
+            <div>
+              <AlertPicker errorCount={errorCount} />
+            </div>
+          }
         </CardFooter>
       </Card>
-      <pre>
-        errorCount: {errorCount}
-      </pre>
-    </main>
+    </main >
   )
 }
