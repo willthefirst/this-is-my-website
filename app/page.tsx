@@ -9,8 +9,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center p-24">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>Welcome</CardTitle>
-          <CardDescription>Let&apos;s get started.</CardDescription>
+          <CardTitle>Welcome!</CardTitle>
         </CardHeader>
         <CardContent>
           <form>
